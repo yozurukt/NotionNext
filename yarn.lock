@@ -1003,6 +1003,18 @@
     "@swc/counter" "^0.1.3"
     tslib "^2.4.0"
 
+"@tabler/icons-react@^3.37.1":
+  version "3.37.1"
+  resolved "https://registry.npmmirror.com/@tabler/icons-react/-/icons-react-3.37.1.tgz#f8da613ede004580d27bb6eb1eeddb8b30950241"
+  integrity sha512-R7UE71Jji7i4Su56Y9zU1uYEBakUejuDJvyuYVmBuUoqp/x3Pn4cv2huarexR3P0GJ2eHg4rUj9l5zccqS6K/Q==
+  dependencies:
+    "@tabler/icons" ""
+
+"@tabler/icons@":
+  version "3.37.1"
+  resolved "https://registry.npmmirror.com/@tabler/icons/-/icons-3.37.1.tgz#63321590040eba80b8257631648023c5139d6d3c"
+  integrity sha512-neLCWkuyNHEPXCyYu6nbN4S3g/59BTa4qyITAugYVpq1YzYNDOZooW7/vRWH98ZItXAudxdKU8muFT7y1PqzuA==
+
 "@tanstack/react-virtual@^3.0.0-beta.60":
   version "3.11.0"
   resolved "https://registry.npmmirror.com/@tanstack/react-virtual/-/react-virtual-3.11.0.tgz"
@@ -5528,6 +5540,11 @@ regexpp@^3.0.0:
   version "3.2.0"
   resolved "https://registry.npmmirror.com/regexpp/-/regexpp-3.2.0.tgz"
   integrity sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==
+
+remixicon-react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/remixicon-react/-/remixicon-react-1.0.0.tgz#7500e3e4d4daeaf7e9d7231f0f60dbb081727825"
+  integrity sha512-KOXlc8EdKdujr2f/2idyFSQRjUB8p0HNiWZYBBzRsTRlTXFuSAFfnGq9culNjhCGmc92Jbtfr9OP0MXWvTMdsQ==
 
 require-directory@^2.1.1:
   version "2.1.1"
