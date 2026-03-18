@@ -36,23 +36,32 @@ export default function ArticleInfo(props) {
               </span>
             </div>
 
+            {/* 分隔符 */}
+            {(post.category || (post.tags && post.tags.length > 0)) && (
+              <div className="mx-2 text-gray-400 dark:text-gray-500">|</div>
+            )}
+
             <div className='text-sm'>
-              {/* {post.category && (
-                <SmartLink href={`/category/${post.category}`} className='p-1'>
-                  {' '}
-                  <span className='hover:text-red-400 transition-all duration-200'>
-                    <i className='fa-regular fa-folder mr-0.5' />
-                    {post.category}
-                  </span>
-                </SmartLink>
-              )} */}
+              {post.category && (
+                <>
+                  <SmartLink href={`/category/${post.category}`} className='p-1'>
+                    <span className='hover:text-red-400 dark:hover:text-white transition-all duration-200'>
+                      <i className='fa-regular fa-folder mr-0.5' />
+                      {post.category}
+                    </span>
+                  </SmartLink>
+                  {post?.tags && post?.tags?.length > 0 && (
+                    <span className="mx-2 text-gray-400 dark:text-gray-500">|</span>
+                  )}
+                </>
+              )}
               {post?.tags &&
                 post?.tags?.length > 0 &&
                 post?.tags.map(t => (
                   <SmartLink
                     key={t}
-                    href={`/tag/${t}`}
-                    className=' hover:text-red-400 transition-all duration-200'>
+                    href={`/tag/${encodeURIComponent(t)}`}
+                    className=' hover:text-red-400 dark:hover:text-white transition-all duration-200'>
                     <span> #{t}</span>
                   </SmartLink>
                 ))}
