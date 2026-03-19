@@ -40,3 +40,4 @@ jobs:
           REMOTE_PORT: ${{ secrets.SSH_PORT }}
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
           TARGET: ${{ secrets.TARGET }}
+          SCRIPT_AFTER: ${{ secrets.POST_DEPLOY_CMD }}
