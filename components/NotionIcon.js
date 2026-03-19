@@ -14,6 +14,7 @@ const NotionIcon = ({ icon }) => {
     return <LazyImage src={icon} className='w-8 h-8 my-auto inline mr-1'/>
   }
 
+
   return <span className='mr-1'>{icon}</span>
 }
 
