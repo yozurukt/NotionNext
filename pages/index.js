@@ -1,6 +1,7 @@
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { fetchGlobalAllData, getPostBlocks } from '@/lib/db/SiteDataApi'
+import { generateLlmsTxt } from '@/lib/utils/llms.txt'
 import { generateRobotsTxt } from '@/lib/utils/robots.txt'
 import { generateRss } from '@/lib/utils/rss'
 import { generateSitemapXml } from '@/lib/utils/sitemap.xml'
@@ -58,9 +59,11 @@ export async function getStaticProps(req) {
 
   // 生成robotTxt
   generateRobotsTxt(props)
+  // 生成llms.txt（异步：需要获取文章全文）
+  await generateLlmsTxt(props)
   // 生成Feed订阅
   generateRss(props)
-  // 生成
+  // 生成Sitemap
   generateSitemapXml(props)
   // 检查数据是否需要从algolia删除
   checkDataFromAlgolia(props)

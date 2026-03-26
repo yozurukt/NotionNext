@@ -45,6 +45,9 @@ yarn-error.log*
 /public/robots.txt
 /public/sitemap.xml
 /public/rss/*
+/public/llms.txt
+/public/llms-full.txt
+/public/md/
 /sitemap.xml
 
 # yarn
