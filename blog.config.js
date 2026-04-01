@@ -17,6 +17,9 @@ const BLOG = {
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'Yozuru',
   BIO: process.env.NEXT_PUBLIC_BIO || '在世界中心呼唤爱的野兽。',
+  // 社交平台分享卡片图片，静态部署时 Notion 封面链接外部无法访问，需填写完整公网 URL
+  // about 页面会自动使用 /avatar.jpg，其他页面使用此配置
+  OG_IMAGE: process.env.NEXT_PUBLIC_OG_IMAGE || '/bg_image.jpg',
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://yozuru.cn',
   KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Yozuru, 博客',
   BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png

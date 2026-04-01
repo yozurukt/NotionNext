@@ -19,6 +19,8 @@ const SEO = props => {
   let image
   const router = useRouter()
   const meta = getSEOMeta(props, router, useGlobal()?.locale)
+  // 读取兜底 OG 图片配置（公网可访问的图片 URL，用于静态部署场景）
+  const OG_IMAGE = siteConfig('OG_IMAGE', '/avatar.jpg', NOTION_CONFIG)
   const webFontUrl = siteConfig('FONT_URL')
 
   useEffect(() => {
@@ -48,11 +50,22 @@ const SEO = props => {
   }
   if (meta) {
     url = `${url}/${meta.slug}`
-    image = meta.image || '/bg_image.jpg'
+    // 若 image 来自 Notion 内部链接（静态部署后外部爬虫无法访问），回退到 OG_IMAGE
+    const rawImage = meta.image
+    const isNotionInternal =
+      !rawImage ||
+      rawImage === 'undefined' || // 模板字符串 ${undefined} 会产生字符串 "undefined"
+      rawImage.includes('notion.so') ||
+      rawImage.includes('notion-static') ||
+      rawImage.startsWith('/')
+    // 如果 meta 已经包含完整 URL（http/https 开头）则直接使用，否则用兑底图
+    image = isNotionInternal ? OG_IMAGE : rawImage
   }
   const TITLE = siteConfig('TITLE')
+  const BIO = siteConfig('BIO')
   const title = meta?.title || TITLE
-  const description = meta?.description || `${siteInfo?.description}`
+  // 首页优先使用 BIO 作为描述，其余页面使用文章摘要或站点描述
+  const description = meta?.description || BIO || `${siteInfo?.description}`
   const type = meta?.type || 'website'
   const lang = siteConfig('LANG').replace('-', '_') // Facebook OpenGraph 要 zh_CN 這樣的格式才抓得到語言
   const category = meta?.category || KEYWORDS // section 主要是像是 category 這樣的分類，Facebook 用這個來抓連結的分類
@@ -294,7 +307,7 @@ const getSEOMeta = (props, router, locale) => {
     case '/':
       return {
         title: `${siteInfo?.title} | ${siteInfo?.description}`,
-        description: `${siteInfo?.description}`,
+        description: null, // 由上层使用 BIO 填充
         image: `${siteInfo?.pageCover}`,
         slug: '',
         type: 'website'
@@ -386,7 +399,10 @@ const getSEOMeta = (props, router, locale) => {
         description: post?.summary,
         type: post?.type,
         slug: post?.slug,
-        image: post?.pageCoverThumbnail || `${siteInfo?.pageCover}`,
+        // about 页面使用头像（完整 URL 避免被 isNotionInternal 误判），其余页面使用文章封面
+        image: post?.slug === 'about'
+          ? `${siteConfig('LINK')}/avatar.jpg`
+          : (post?.pageCoverThumbnail || `${siteInfo?.pageCover}`),
         category: post?.category?.[0],
         tags: post?.tags
       }
