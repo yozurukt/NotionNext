@@ -4,6 +4,7 @@ import { resolvePostProps } from '@/lib/db/SiteDataApi'
 import Slug from '..'
 import { checkSlugHasOneSlash } from '@/lib/utils/post'
 import { getStaticPathsBase } from '@/lib/build/staticPaths'
+import { isExport } from '@/lib/utils/buildMode'
 
 /**
  * 根据notion的slug访问页面
