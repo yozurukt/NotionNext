@@ -1,22 +1,21 @@
 /**
- * @author https://github.com/txs
- * 通用 Mac 风格代码块样式 (NotionNext Universal)
+ * Mac 风格代码块样式 (NotionNext Universal)
+ * 修复：浅色/深色模式正确适配
  **/
 
-/* 1. Mac 窗口容器样式 */
+/* 1. Mac 窗口容器 */
 .code-toolbar {
   position: relative;
   width: 100%;
   margin: 1rem 0;
   border-radius: 14px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(27, 28, 32, 0.94); /* 浅色模式下默认暗底 */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 18px 44px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* 暗色模式适配 */
 html.dark .code-toolbar {
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(27, 28, 32, 0.72);
@@ -45,7 +44,7 @@ html.dark .code-toolbar {
 .pre-mac > span:nth-child(2) { background: #febc2e; }
 .pre-mac > span:nth-child(3) { background: #28c840; }
 
-/* 3. Toolbar 工具栏 (复制按钮、语言标签) */
+/* 3. Toolbar 工具栏 */
 .code-toolbar > .toolbar {
   position: absolute;
   top: 0;
@@ -58,19 +57,31 @@ html.dark .code-toolbar {
   z-index: 12;
 }
 
+/* 浅色模式 toolbar 按钮 */
 .code-toolbar .toolbar-item > button {
   font-size: 12px !important;
   line-height: 1 !important;
   padding: 6px 8px !important;
   border-radius: 999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: rgba(60, 60, 67, 0.7) !important;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .code-toolbar .toolbar-item > button:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+html.dark .code-toolbar .toolbar-item > button {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+html.dark .code-toolbar .toolbar-item > button:hover {
   background: rgba(255, 255, 255, 0.2) !important;
   color: #fff !important;
 }
@@ -84,12 +95,16 @@ pre.notion-code {
   border-radius: 0 !important;
   border: none !important;
   background: transparent !important;
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: inherit !important;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* 5. 智能折叠 S1 极简 UI */
+html.dark pre.notion-code {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 5. 折叠面板 */
 .collapse-wrapper {
   margin: 1rem 0;
 }
@@ -158,27 +173,28 @@ html.dark .collapse-panel {
   max-height: none;
 }
 
-/* 6. Prism 代码高亮补丁 (暗底优化) */
-.code-toolbar .token.comment,
-.code-toolbar .token.prolog,
-.code-toolbar .token.doctype,
-.code-toolbar .token.cdata { color: rgba(235, 235, 245, 0.46); }
-.code-toolbar .token.punctuation { color: rgba(235, 235, 245, 0.6); }
-.code-toolbar .token.property,
-.code-toolbar .token.tag,
-.code-toolbar .token.boolean,
-.code-toolbar .token.number,
-.code-toolbar .token.constant,
-.code-toolbar .token.symbol,
-.code-toolbar .token.deleted { color: #7ee787; }
-.code-toolbar .token.selector,
-.code-toolbar .token.attr-name,
-.code-toolbar .token.string,
-.code-toolbar .token.char,
-.code-toolbar .token.builtin,
-.code-toolbar .token.inserted { color: #a5d6ff; }
-.code-toolbar .token.atrule,
-.code-toolbar .token.attr-value,
-.code-toolbar .token.keyword { color: #ff7ab2; }
-.code-toolbar .token.function,
-.code-toolbar .token.class-name { color: #ffd479; }
+/* 6. Prism 高亮 — 浅色模式保持原 Prism 主题颜色，不做补丁覆盖 */
+/* 深色模式下微调 token 对比度 */
+html.dark .code-toolbar .token.comment,
+html.dark .code-toolbar .token.prolog,
+html.dark .code-toolbar .token.doctype,
+html.dark .code-toolbar .token.cdata { color: rgba(235, 235, 245, 0.46); }
+html.dark .code-toolbar .token.punctuation { color: rgba(235, 235, 245, 0.6); }
+html.dark .code-toolbar .token.property,
+html.dark .code-toolbar .token.tag,
+html.dark .code-toolbar .token.boolean,
+html.dark .code-toolbar .token.number,
+html.dark .code-toolbar .token.constant,
+html.dark .code-toolbar .token.symbol,
+html.dark .code-toolbar .token.deleted { color: #7ee787; }
+html.dark .code-toolbar .token.selector,
+html.dark .code-toolbar .token.attr-name,
+html.dark .code-toolbar .token.string,
+html.dark .code-toolbar .token.char,
+html.dark .code-toolbar .token.builtin,
+html.dark .code-toolbar .token.inserted { color: #a5d6ff; }
+html.dark .code-toolbar .token.atrule,
+html.dark .code-toolbar .token.attr-value,
+html.dark .code-toolbar .token.keyword { color: #ff7ab2; }
+html.dark .code-toolbar .token.function,
+html.dark .code-toolbar .token.class-name { color: #ffd479; }
